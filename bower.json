@@ -1,0 +1,25 @@
+{
+  "name": "web-components-now",
+  "version": "3.0.0-alpha",
+  "homepage": "https://github.com/leggetter/realtime-internet-apps",
+  "authors": [
+    "leggetter <phil@leggetter.co.uk>"
+  ],
+  "description": "Real-Time Internet Apps",
+  "keywords": [
+    "presentation"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pusher-remark-themes": "*",
+    "remark": "~0.12.0"
+  }
+}
