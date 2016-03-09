@@ -6,8 +6,11 @@
 /* end of 4:3 change */
 
 .demo-splash.bottom h3 {
-  bottom: -45px;
+  bottom: 0px;
+  left: 0px;
   display: block;
+  width: 90%;
+  margin: 0;
 }
 
 .full-width {

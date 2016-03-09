@@ -42,8 +42,9 @@ class: bg-white, center, middle, white-text
 template: dblue
 class: title
 
-# Real-time Web Apps & Symfony.
-# What are your options?
+# Real-time Web Apps & PHP.<br />What are your options?
+
+<img src="./img/cloudconf.png" style="width: 25%;" />
 
 * <span class="speaker">Phil @leggetter</span>
 * <span class="speaker-job-title">Head of Developer Relations</span>
@@ -62,15 +63,28 @@ background-image: url(./img/nexmo/what-nexmo-offers.png)
 ---
 
 template: dblue
+
+## You Have Realtime Data
+
+<img src="./img/cloudconf-2015.png" style="width: 25%" />
+
+* Changes/Interactions = Realtime Data
+* Analyse, Describe, Publish, Consume Data
+* Use to Analyse your apps in real-time
+* Build realtime features for your customers
+
+---
+
+template: dblue
 class: fixed-width-list
 
 ## What we'll cover
 
 1. Why Real-Time?
 2. What are your options
-  * How do you choose?
+  * 6 Factors to consider when choosing
+3. 3 x Example Solutions for PHP
   * Pros & Cons
-3. 3 Example Solutions for PHP
 
 ---
 
@@ -86,33 +100,23 @@ class: bg-dark-blue, h1-big
 ---
 
 class: em-text, bg-cover, trans-h, bottom
-background-image: url(./img/itv-news-nov-2015.gif)
+background-image: url(./img/twitter-notifications.gif)
 
-# Notifications & Signalling
+# Notifications & Activity Streams
 
 ???
 
-* Something has happened
-* Changed
+Notifications
+
+* Something has happened /Changed
 * Alert - do something
 
----
+Activity Streams: 
 
-class: bg-cover, em-text, trans-h, bottom
-background-image: url(./img/delighted-app.gif)
-
-# Activity Streams
-
-???
-
-* a stream of activity
-* things have - and are - happening
+* a stream of activity: past & new
 * synonymous with social apps
-  * Twitter
-  * Facebook
-  * Google+
-  * News
-  * Sports
+  * Twitter, Facebook, Google+
+  * News, Sports
 
 ---
 
@@ -153,7 +157,7 @@ background-image: url(./img/uber.jpg)
 ---
 
 class: trans-h, bottom, bg-cover
-background-image: url(./img/atom-pair.gif)
+background-image: url(./img/gdocs-collaboration.png)
 
 # Multi-User Collaboration
 
@@ -165,20 +169,10 @@ background-image: url(./img/atom-pair.gif)
 
 ---
 
-class: bg-cover, trans-h, bg-white
-background-image: url(./img/lunar-landing.png)
-
-<h3 style="position: absolute; top: 2%; right: 2%; display: inline-block";>
-  Multiplayer Games /<br />
-  "Do some real-time art!"
-</h3>
-
----
-
 class: top
 
 <img width="20%" src="./img/facebook.png" />
-<img width="20%" src="./img/uservoice.png" />
+<img width="20%" src="./img/slack.png" />
 <img width="25%" src="./img/google-docs.png" />
 <img width="20%" src="./img/uber.png" />
 
@@ -275,10 +269,16 @@ background-image: url(./img/windows-apple-android.jpg)
 
 ---
 
+class: top
+
 ## Native Mobile Support?
 
 * Only some have mobile libraries
+--
+
 * How much data are you sending?
+--
+
 * SSL required on 3/4G networks
 
 ---
@@ -297,9 +297,11 @@ background-image: url(./img/windows-apple-android.jpg)
 ---
 
 template: dblue
-class: h1-big
+class: h1-big top
 
 # 4. Application/Solution<br />Communication Patterns
+
+--
 
 How does the client/server &amp; client/client communicate
 
@@ -309,47 +311,65 @@ Let me clarify this with code.
 
 ---
 
-class: left-content, code-reveal, top wide
+class: code-reveal top wide larger-code
 
-## Simple Messaging
+#### Simple Messaging
 
 ```js
 // client
 
-var sock = new SockJS( 'http://localhost:9999/sockjs' );
+var ws = new WebSocket('wss://localhost/');
 ```
 --
-
+```js
+ws.onmessage = function(evt) {
+  var data = JSON.parse(evt.data);
 ```
-sock.onmessage = function( e ) {
-  console.log( 'message', e.data );
+--
+```js
+  // ^5  
+  performHighFive();
 };
 ```
 --
+
 <hr />
+
 ```js
 // server
 
-sock.write( 'hello SockJS' );
+server.on('connection', function(socket){
 ```
+--
+```js
+  socket.send(JSON.stringify({action: 'high-5'}));
+});
+```
+
+???
+
+* Simplistic pattern
+* Similar to WebHooks
 
 ---
 
-class: code-reveal top wide
+class: code-reveal top wide larger-code
 
-## PubSub
+#### PubSub
 
 ```js
 // client
 
-var client = new FayeClient();
+var client = new Faye.Client('http://localhost:8000/faye');
 ```
 --
-
+```js
+client.subscribe('/news', function(data) {
 ```
-client.subscribe( 'chat', function( message ) {
-  // Handle Update
-} );
+--
+```js
+  console.log(data.headline);
+});
 ```
 --
 <hr />
@@ -357,84 +377,101 @@ client.subscribe( 'chat', function( message ) {
 ```js
 // server
 
-var message = {
-  text: 'Hello, world!',
-  user_name: '@leggetter'
-}
-Faye.publish( 'chat', message );
+server.publish('/news', {headline: 'Nexmo Rocks!'});
 ```
 
 ---
 
-class: code-reveal top wide
+class: long wide code-reveal top larger-code
 
-## Evented PubSub
+#### Evented PubSub
 
 ```js
 // client
 
-var pusher = new Pusher( APP_KEY );
-```
---
-
-```js
-var channel = pusher.subscribe( 'chat' );
+var status = io('/leggetter-status');
 ```
 --
 ```js
-channel.bind( 'message', function( data ) {
-  // Handle Update
-} );
+status.on('created', function (data) {
+  // Add activity to UI
+});
+```
+--
+```js
+status.on('updated', function(data) {
+  // Update activity
+});
+status.on('deleted', function(data) {
+  // Remove activity
+});
 ```
 --
 
-```
-channel.bind( 'message-updated', function( data ) {} );
-
-channel.bind( 'room-name-changed', function( data ) {} );
-```
---
 <hr />
 
 ```js
 // server
 
-var data = [
-  'text' => 'Hello, world!',
-  'user_name' => '@leggetter'
-}
-pusher->trigger( 'chat', 'message', data );
+var io = require('socket.io')();
+var status = io.of('/leggetter-status');
+```
+
+--
+```js
+status.emit('created', {text: 'PubSub Rocks!', id: 1});
+```
+--
+```js
+status.emit('updated', {text: 'Evented PubSub Rocks!', id: 1});
+status.emit('deleted', {id: 1});
 ```
 
 ---
 
-class: code-reveal top wide
+class: code-reveal top larger-code long wide
 
-## Data Sync
+#### Data Sync
 
 ```js
-var myDataRef = new Firebase('https://yo.firebaseio.com/');
+// client
+
+var ref = new Firebase("https://app.firebaseio.com/doc1/lines");
+```
+--
+```js
+
+ref.on('child_added', function(childSnapshot, prevChildKey) {
+  // code to handle new child.
+});
 ```
 --
 
-```
-myDataRef.push( {name: '@leggetter', text: 'Yo!'} );
+```js
+
+ref.on('child_changed', function(childSnapshot, prevChildKey) {
+  // code to handle child data changes.
+});
+
 ```
 --
 
-```
-myDataRef.on( 'child_added', function(snapshot) {
-  // Data added
-});
+```js
 
-myDataRef.on( 'child_changed', function(snapshot) {
-  // Data has changed
-});
-
-myDataRef.on( 'child_removed', function(snapshot) {
-  // Data removed
+ref.on('child_removed', function(oldChildSnapshot) {
+  // code to handle child removal.
 });
 ```
+--
+
+```js
+
+ref.push({ 'editor_id': 'leggetter', 'text': 'Nexmo Rocks!' });
+```
+
+--
+
+Framework handles updates to other clients
 
 ???
 
@@ -443,9 +480,9 @@ myDataRef.on( 'child_removed', function(snapshot) {
 
 ---
 
-class: top code-reveal long wide
+class: top code-reveal long wide larger-code
 
-## RMI
+#### RMI
 
 ```js
 // client
@@ -749,7 +786,7 @@ class: fixed-width-list
 template: dblue
 class: title
 
-## Real-time Web Apps & Symfony.</br>What are your options?
+## Real-time Web Apps & PHP.</br>What are your options?
 
 ### Questions?
 
