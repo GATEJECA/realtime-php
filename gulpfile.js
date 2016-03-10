@@ -13,7 +13,7 @@ gulp.task('serve', function() {
       livereload: false,
       directoryListing: false,
       open: true,
-      port: 8080
+      port: 9000
     }));
 });
 

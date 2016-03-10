@@ -63,19 +63,6 @@ background-image: url(./img/nexmo/what-nexmo-offers.png)
 ---
 
 template: dblue
-
-## You Have Realtime Data
-
-<img src="./img/cloudconf-2015.png" style="width: 25%" />
-
-* Changes/Interactions = Realtime Data
-* Analyse, Describe, Publish, Consume Data
-* Use to Analyse your apps in real-time
-* Build realtime features for your customers
-
----
-
-template: dblue
 class: fixed-width-list
 
 ## What we'll cover
@@ -96,6 +83,7 @@ class: bg-dark-blue, h1-big
 ???
 
 * Here are some examples of apps...
+* And their use cases. The use cases demonstrate why real-time is important
 
 ---
 
@@ -120,9 +108,8 @@ Activity Streams:
 
 ---
 
-
 class: bg-cover, em-text, trans-h, bg-white, bottom
-background-image: url(./img/senate-election-results.png)
+background-image: url(./img/lequipe-football.png)
 
 # Data Visualizations
 
@@ -215,7 +202,7 @@ class: fixed-width-list top
 
 ## Why use an existing solution?
 
-* Fallback/upgrade hacks still required
+* Connection fallback/upgrade hacks still required
 --
 
 * Support/Community
@@ -265,13 +252,13 @@ template: dblue
 class: h1-big, trans-h, bg-contain
 background-image: url(./img/windows-apple-android.jpg)
 
-# 3. Native Mobile Support?
+# 3. Mobile Friendly?
 
 ---
 
 class: top
 
-## Native Mobile Support?
+## Mobile Friendly
 
 * Only some have mobile libraries
 --
@@ -562,11 +549,13 @@ class: h1-big
 
 ---
 
-class: fixed-width-list
+class: fixed-width-list top
 
-## I wanna build a real-time PHP app
-or
 ## I wanna add real-time to an existing PHP app
+--
+
+or
+## I wanna build a real-time PHP app
 
 ---
 
@@ -752,7 +741,7 @@ template: dblue
 
 1. Use an Existing Solution
 2. Use a language you're comfortable with
-3. Do you need native mobile support?
+3. Do you need the framework to be mobile friendly?
 4. Simple Messaging, PubSub (Evented), RMI or DataSync
 5. Architectural considerations
 6. Hosted v Self-Hosted (Build vs. Buy)
@@ -776,10 +765,13 @@ class: fixed-width-list
 * [Real-time Tech Guide](http://j.mp/realtime-tech-guide)
 * [React (PHP)](http://reactphp.org/)
 * [Ratchet (PHP)](http://socketo.me/)
+* Symfony + React (PHP) [1](https://github.com/jogaram/react-bundle) [2](https://github.com/jakubkulhan/reactphp-symfony)
+* Laravel + React (PHP) [1](https://github.com/sh0umik/lumen-reactphp)
+* [Real-Time Laravel Workshop](http://leggetter.github.io/realtime-laravel)
 * [Faye (Node/Ruby)](http://faye.jcoglan.com/)
 * [Nexmo](https://www.nexmo.com)
 * [LopiPusherBundle](https://github.com/laupiFrpar/LopiPusherBundle)
-* [github.com/leggetter/realtime-php-examples](https://github.com/leggetter/realtime-php-examples)
+* [github.com/leggetter/realtime-symfony-examples](https://github.com/leggetter/realtime-symfony-examples)
 
 ---
 
