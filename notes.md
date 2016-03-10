@@ -66,3 +66,4 @@ sym-redis
 1. Call +39 0683 600 016
 2. Add `$this->sendSmsToAll($message)`
 3. In demo window type is message to send.
+4. Thanks for coming to my CloudConf2016 talk. I'm @leggetter and I work for Nexmo, a Cloud Communications Platform https://www.nexmo.com
