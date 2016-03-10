@@ -772,6 +772,7 @@ class: fixed-width-list
 * [Nexmo](https://www.nexmo.com)
 * [LopiPusherBundle](https://github.com/laupiFrpar/LopiPusherBundle)
 * [github.com/leggetter/realtime-symfony-examples](https://github.com/leggetter/realtime-symfony-examples)
+* [leggetter.github.io/realtime-php/](https://leggetter.github.io/realtime-php/)
 
 ---
 
@@ -782,7 +783,7 @@ class: title
 
 ### Questions?
 
-[leggetter.github.io/realtime-php](leggetter.github.io/realtime-php)
+[leggetter.github.io/realtime-php](https://leggetter.github.io/realtime-php/)
 
 * <span class="speaker">Phil @leggetter</span>
 * <span class="speaker-job-title">Head of Developer Relations</span>
